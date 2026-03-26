@@ -1,0 +1,8 @@
+{% extends "global/Page.html" %}
+{% block content %}
+<h3>Results</h3>
+<p>Target: {{ group.target }}</p>
+<p>Speaker said: {{ player_in_previous_rounds.word }}</p>
+<p>Listener guessed: {{ player.guess }}</p>
+{{ next_button }}
+{% endblock %}
