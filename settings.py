@@ -18,6 +18,13 @@ SESSION_CONFIG_DEFAULTS = dict(
 PARTICIPANT_FIELDS = []
 SESSION_FIELDS = []
 
+ROOMS = [
+    dict(
+        name='linguistics_lab',
+        display_name='Linguistics Lab',
+    ),
+]
+
 LANGUAGE_CODE = 'en'
 REAL_WORLD_CURRENCY_CODE = 'USD'
 USE_POINTS = True
@@ -58,6 +65,14 @@ DEMO_PAGE_INTRO_HTML = """
         font-size: 1.1rem;
         opacity: 0.96;
     }
+    .blossom-image {
+        margin-top: 10px;
+        width: 100%;
+        max-width: 420px;
+        border-radius: 12px;
+        border: 2px solid #d9a6e8;
+        box-shadow: 0 6px 18px rgba(168, 88, 149, 0.22);
+    }
     .ling-badge {
         display: inline-block;
         margin-top: 10px;
@@ -81,6 +96,7 @@ DEMO_PAGE_INTRO_HTML = """
 
 <div class=\"saba-demo-wrap\">
     <p class=\"saba-demo-title\">Welcome to Saba's demo session <span class=\"wave\">👋</span></p>
+    <img class=\"blossom-image\" src=\"https://tse1.mm.bing.net/th/id/OIP.hS7da-1k4pOe_e8h-UyapwHaE1?pid=ImgDet&w=187&h=122&c=7&dpr=1,3&o=7&rm=3\" alt=\"Japanese cherry blossom tree\">
     <div class=\"flowers\">🌸 🌷 🌺 🌸 🌷</div>
     <div class=\"ling-badge\">Linguistics Mini Page</div>
 </div>
