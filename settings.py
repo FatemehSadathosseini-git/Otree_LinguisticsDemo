@@ -27,6 +27,63 @@ ADMIN_USERNAME = 'admin'
 # Set this in environment for production; default is convenient for local dev.
 ADMIN_PASSWORD = environ.get('OTREE_ADMIN_PASSWORD', 'admin')
 
-DEMO_PAGE_INTRO_HTML = '<style>.wave{display:inline-block;transform-origin:70% 70%;animation:wave 1.2s infinite;}@keyframes wave{0%,60%,100%{transform:rotate(0deg);}10%,30%{transform:rotate(14deg);}20%,40%{transform:rotate(-8deg);}50%{transform:rotate(10deg);}}</style><p style="color: purple; font-weight: 700; font-size: 1.05rem;">Welcome to Saba\'s demo session <span class="wave">👋</span></p>'
+DEMO_PAGE_INTRO_HTML = """
+<style>
+    body {
+        background: linear-gradient(180deg, #ffe8f6 0%, #ffdff1 100%);
+    }
+    .saba-demo-wrap {
+        margin: 8px 0 18px;
+        padding: 14px 16px;
+        border-radius: 14px;
+        border: 2px solid #d59be8;
+        background: rgba(255, 255, 255, 0.68);
+        box-shadow: 0 8px 20px rgba(193, 84, 152, 0.15);
+    }
+    .saba-demo-title {
+        color: #7a1fa2;
+        font-weight: 800;
+        font-size: 1.12rem;
+        margin: 0;
+        letter-spacing: 0.1px;
+    }
+    .wave {
+        display: inline-block;
+        transform-origin: 70% 70%;
+        animation: wave 1.2s infinite;
+    }
+    .flowers {
+        margin-top: 8px;
+        color: #a100c3;
+        font-size: 1.1rem;
+        opacity: 0.96;
+    }
+    .ling-badge {
+        display: inline-block;
+        margin-top: 10px;
+        padding: 4px 10px;
+        border-radius: 999px;
+        background: #ffe0f4;
+        border: 1px solid #d18cd8;
+        color: #7a1fa2;
+        font-size: 0.78rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.6px;
+    }
+    @keyframes wave {
+        0%, 60%, 100% { transform: rotate(0deg); }
+        10%, 30% { transform: rotate(14deg); }
+        20%, 40% { transform: rotate(-8deg); }
+        50% { transform: rotate(10deg); }
+    }
+</style>
+
+<div class=\"saba-demo-wrap\">
+    <p class=\"saba-demo-title\">Welcome to Saba's demo session <span class=\"wave\">👋</span></p>
+    <div class=\"flowers\">🌸 🌷 🌺 🌸 🌷</div>
+    <div class=\"ling-badge\">Linguistics Mini Page</div>
+</div>
+"""
 
 SECRET_KEY = 'CHANGE_ME_FOR_PRODUCTION'
