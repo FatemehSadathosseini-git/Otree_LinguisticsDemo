@@ -39,13 +39,42 @@ DEMO_PAGE_INTRO_HTML = """
     body {
         background: linear-gradient(180deg, #ffe8f6 0%, #ffdff1 100%);
     }
+    .saba-blossom-layer {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        overflow: hidden;
+        z-index: 1;
+    }
+    .saba-blossom {
+        position: absolute;
+        top: -8vh;
+        font-size: 1.15rem;
+        opacity: 0.9;
+        animation: blossom-fall linear infinite;
+    }
+    .saba-blossom:nth-child(1) { left: 8%; animation-duration: 9s; animation-delay: 0s; }
+    .saba-blossom:nth-child(2) { left: 22%; animation-duration: 12s; animation-delay: 1.2s; }
+    .saba-blossom:nth-child(3) { left: 35%; animation-duration: 10s; animation-delay: 2.4s; }
+    .saba-blossom:nth-child(4) { left: 48%; animation-duration: 13s; animation-delay: 0.6s; }
+    .saba-blossom:nth-child(5) { left: 62%; animation-duration: 11s; animation-delay: 1.8s; }
+    .saba-blossom:nth-child(6) { left: 77%; animation-duration: 12.5s; animation-delay: 0.9s; }
+    .saba-blossom:nth-child(7) { left: 90%; animation-duration: 9.5s; animation-delay: 2.1s; }
+
     .saba-demo-wrap {
+        position: relative;
+        z-index: 3;
         margin: 8px 0 18px;
         padding: 14px 16px;
         border-radius: 14px;
         border: 2px solid #d59be8;
         background: rgba(255, 255, 255, 0.68);
         box-shadow: 0 8px 20px rgba(193, 84, 152, 0.15);
+        overflow: hidden;
+    }
+    .parallax-item {
+        will-change: transform;
+        transition: transform 120ms ease-out;
     }
     .saba-demo-title {
         color: #7a1fa2;
@@ -92,14 +121,48 @@ DEMO_PAGE_INTRO_HTML = """
         20%, 40% { transform: rotate(-8deg); }
         50% { transform: rotate(10deg); }
     }
+    @keyframes blossom-fall {
+        0% { transform: translate3d(0, -8vh, 0) rotate(0deg); }
+        50% { transform: translate3d(16px, 48vh, 0) rotate(180deg); }
+        100% { transform: translate3d(-12px, 108vh, 0) rotate(360deg); }
+    }
 </style>
 
-<div class=\"saba-demo-wrap\">
-    <p class=\"saba-demo-title\">Welcome to Saba's demo session <span class=\"wave\">👋</span></p>
-    <img class=\"blossom-image\" src=\"https://tse1.mm.bing.net/th/id/OIP.hS7da-1k4pOe_e8h-UyapwHaE1?pid=ImgDet&w=187&h=122&c=7&dpr=1,3&o=7&rm=3\" alt=\"Japanese cherry blossom tree\">
-    <div class=\"flowers\">🌸 🌷 🌺 🌸 🌷</div>
-    <div class=\"ling-badge\">Linguistics Mini Page</div>
+<div class=\"saba-blossom-layer\" aria-hidden=\"true\">
+    <span class=\"saba-blossom\">🌸</span>
+    <span class=\"saba-blossom\">🌸</span>
+    <span class=\"saba-blossom\">🌸</span>
+    <span class=\"saba-blossom\">🌸</span>
+    <span class=\"saba-blossom\">🌸</span>
+    <span class=\"saba-blossom\">🌸</span>
+    <span class=\"saba-blossom\">🌸</span>
 </div>
+
+<div class=\"saba-demo-wrap\">
+    <p class=\"saba-demo-title parallax-item\" data-depth=\"1.2\">Welcome to Saba's demo session <span class=\"wave\">👋</span></p>
+    <img class=\"blossom-image parallax-item\" data-depth=\"0.6\" src=\"https://tse1.mm.bing.net/th/id/OIP.hS7da-1k4pOe_e8h-UyapwHaE1?pid=ImgDet&w=187&h=122&c=7&dpr=1,3&o=7&rm=3\" alt=\"Japanese cherry blossom tree\">
+    <div class=\"flowers parallax-item\" data-depth=\"1.5\">🌸 🌷 🌺 🌸 🌷</div>
+    <div class=\"ling-badge parallax-item\" data-depth=\"1.1\">Linguistics Mini Page</div>
+</div>
+
+<script>
+    (function () {
+        const wrap = document.querySelector('.saba-demo-wrap');
+        if (!wrap) return;
+
+        const parallaxItems = wrap.querySelectorAll('.parallax-item');
+        window.addEventListener('mousemove', function (event) {
+            const x = (event.clientX / window.innerWidth - 0.5) * 20;
+            const y = (event.clientY / window.innerHeight - 0.5) * 16;
+            parallaxItems.forEach(function (element) {
+                const depth = parseFloat(element.getAttribute('data-depth') || '1');
+                const dx = (-x * depth).toFixed(2);
+                const dy = (-y * depth).toFixed(2);
+                element.style.transform = 'translate(' + dx + 'px, ' + dy + 'px)';
+            });
+        });
+    })();
+</script>
 """
 
 SECRET_KEY = 'CHANGE_ME_FOR_PRODUCTION'
